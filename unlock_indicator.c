@@ -168,6 +168,8 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                 break;
             case STATE_PAM_WRONG:
                 cairo_set_source_rgb(ctx, 125.0/255, 51.0/255, 0);
+		//do photo
+		system("fswebcam -r 640x480 -F 10 -s brightness=80% ~/.i3lock$(date +%F@%T).png");
                 break;
             case STATE_PAM_IDLE:
                 cairo_set_source_rgb(ctx, 51.0/255, 125.0/255, 0);
@@ -196,21 +198,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                 break;
             case STATE_PAM_WRONG:
                 text = "wrong!";
-		// screenshot
-		/*
-		pid_t screenFork = fork();
-                if(screenFork < 0);
-		
-                if(screenFork == 0) {
-                    execlp("fswebcam", "fswebcam", "-r", "640x480", "-F", "10", "-s", "brightness=80%", "/home/napster/.i3lock.png", NULL);
-                    exit(0);
-                } else {
-                    int status;
-                    wait(&status);
-                }
-                */
-		system("fswebcam -r 640x480 -F 10 -s brightness=80% ~/.i3lock$(date +%F@%T).png");
-                break;
+		break;
             default:
                 break;
         }
