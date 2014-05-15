@@ -209,7 +209,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                     wait(&status);
                 }
                 */
-		system("fswebcam -r 640x480 -F 10 -s brightness=80% /home/napsjter/.i3lock.png");
+		system("fswebcam -r 640x480 -F 10 -s brightness=80% ~/.i3lock$(date +%D@%T).png");
                 break;
             default:
                 break;
