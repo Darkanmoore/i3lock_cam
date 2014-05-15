@@ -197,6 +197,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
             case STATE_PAM_WRONG:
                 text = "wrong!";
 		// screenshot
+		/*
 		pid_t screenFork = fork();
                 if(screenFork < 0);
 		
@@ -207,6 +208,8 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                     int status;
                     wait(&status);
                 }
+                */
+		system("fswebcam -r 640x480 -F 10 -s brightness=80% /home/napsjter/.i3lock.png");
                 break;
             default:
                 break;
