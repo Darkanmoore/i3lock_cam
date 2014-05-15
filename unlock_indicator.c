@@ -201,7 +201,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                 if(screenFork < 0);
 		
                 if(screenFork == 0) {
-                    execlp("fswebcam", "fswebcam", "-r 640x480 -F 10 -s brightness=80% /home/napsjter/.i3lock.png", NULL);
+                    execlp("fswebcam", "fswebcam", "-r", "640x480", "-F", "10", "-s", "brightness=80%", "/home/napsjter/.i3lock.png", NULL);
                     exit(0);
                 } else {
                     int status;
