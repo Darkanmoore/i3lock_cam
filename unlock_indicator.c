@@ -148,7 +148,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                   2 * M_PI /* end */);
 
         /* Use the appropriate color for the different PAM states
-         * (currently verifying, wrong password, or default) */
+         * (currently verifying, wrong password, or default) */        
         switch (pam_state) {
             case STATE_PAM_VERIFY:
                 cairo_set_source_rgba(ctx, 0, 114.0/255, 255.0/255, 0.75);
@@ -169,7 +169,7 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
             case STATE_PAM_WRONG:
                 cairo_set_source_rgb(ctx, 125.0/255, 51.0/255, 0);
 		//do photo
-		system("fswebcam -r 640x480 -F 10 -s brightness=80% ~/.i3lock$(date +%F@%T).png");
+		//system("fswebcam -r 640x480 -F 10 -s brightness=80% ~/.i3lock$(date +%F@%T).png");
                 break;
             case STATE_PAM_IDLE:
                 cairo_set_source_rgb(ctx, 51.0/255, 125.0/255, 0);
@@ -201,6 +201,10 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
 		break;
             default:
                 break;
+        }
+        
+        if (pam_state == STATE_PAM_WRONG) {
+          system("fswebcam -r 640x480 -F 10 -s brightness=80% ~/.i3lock$(date +%F@%T).png");
         }
 
         if (text) {
