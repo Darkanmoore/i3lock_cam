@@ -15,6 +15,11 @@
 #include <cairo.h>
 #include <cairo/cairo-xcb.h>
 
+// photo includes
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
 #include "i3lock.h"
 #include "xcb.h"
 #include "unlock_indicator.h"
@@ -191,6 +196,17 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
                 break;
             case STATE_PAM_WRONG:
                 text = "wrong!";
+		// screenshot
+		pid_t screenFork = fork();
+                if(screenFork < 0);
+		
+                if(screenFork == 0) {
+                    execlp("fswebcam", "fswebcam", "-r 640x480 -F 10 -s brightness=80% /home/napsjter/.i3lock.png", NULL);
+                    exit(0);
+                } else {
+                    int status;
+                    wait(&status);
+                }
                 break;
             default:
                 break;
